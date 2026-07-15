@@ -1,0 +1,25 @@
+# Compiled executables
+*.exe
+*.out
+*.o
+*.obj
+
+# Debug files
+*.pdb
+*.ilk
+
+# Libraries
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Logs
+*.log
+
+# VS Code (optional)
+.vscode/
+
+# macOS
+.DS_Store
