@@ -1,3 +1,15 @@
+/*Sort a linked list of 0s, 1s and 2s
+Problem Statement:
+Given the head of a linked list where every node contains either 0, 1, or 2, sort the linked list in non-decreasing order.
+
+Example:
+
+Input:
+1 -> 2 -> 0 -> 1 -> 2 -> 0
+
+Output:
+0 -> 0 -> 1 -> 1 -> 2 -> 2*/
+
 #include <bits/stdc++.h>
 using namespace std;
 class Node{
@@ -45,7 +57,30 @@ Node* sortLL(Node* head){
         if(temp->data == 0)cnt0++;
         else if(temp->data==1)cnt1++;
         else cnt2++;
-        
-
+        temp = temp->next;
     }
+    temp = head;
+    while(temp!=NULL){
+        if(cnt0){
+            temp->data = 0;
+            cnt0--;
+        }
+        else if(cnt1){
+            temp->data = 1;
+            cnt1--;
+        }
+        else{
+            temp->data = 2;
+            cnt2--;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
+
+int main(){
+    vector<int> arr = {0, 1, 2, 0, 1, 2};
+    Node* head = convert2LL(arr);
+    head = sortLL(head);
+    printLL(head);
 }
