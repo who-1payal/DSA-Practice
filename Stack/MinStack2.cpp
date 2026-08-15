@@ -79,3 +79,15 @@ class Solution{
     }
 
 };
+
+int main(){
+    Solution* s = new Solution();
+    int input;
+    while(true){
+        cin>>input;
+        if(input==-1)break;
+        s->push(input);
+    }
+    cout<<s->getMin()<<endl;
+    return 0;
+}
