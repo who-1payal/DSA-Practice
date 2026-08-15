@@ -52,11 +52,16 @@ public:
 };
 
 int main(){
-    int temperatures;
+    vector<int> temperatures;
     int input;
     while(true){
         cin>>input;
         if(input==-1)break;
-        temperatures.push_back
+        temperatures.push_back(input);
+    }
+    Solution s;
+    vector<int> result = s.dailyTemperatures(temperatures);
+    for(int i = 0; i<temperatures.size(); i++){
+        cout<< result[i]<<" ";
     }
 }
