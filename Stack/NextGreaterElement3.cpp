@@ -1,35 +1,52 @@
+/* Next Greater Element III
+Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), return the next greater number for every element in nums.
+The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return -1 for this number.
+
+Example 1:
+Input: nums = [1,2,1]
+Output: [2,-1,2]
+Explanation: The first 1's next greater number is 2; 
+The number 2 can't find next greater number. 
+The second 1's next greater number needs to search circularly, which is also 2.
+
+Example 2:
+Input: nums = [1,2,3,4,3]
+Output: [2,3,4,-1,4]
+ 
+Constraints:
+1 <= nums.length <= 104
+-109 <= nums[i] <= 109
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
-class Solution{
-    public:
-    vector<int> nextGreat(vector<int>& nums){
-        vector<int> res;
-        for(int num: nums){
-            res.push_back(num);
-        }
-        for(int num: nums){
-            res.push_back(num);
-        }
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
         int n = nums.size();
-        unordered_map<int,int> mp;
+        vector<int> res(n,-1);
         stack<int> st;
 
-        for(int num:res){
-            while(!st.empty() && st.top() < num){
-                mp[st.top()] = num;
+        for(int i = 2*n-1; i>=0; i--){
+            int index = i%n;
+            while(!st.empty() && nums[st.top()]<=nums[index]){
                 st.pop();
             }
-            st.push(num);
+            if(!st.empty() && i<n){
+                res[index] = nums[st.top()];
+            }
+            st.push(index);
         }
-
-        while(!st.empty()){
-            mp[st.top()] = -1;
-            st.pop();
-        }
-        vector<int> ans;
-        for(int x:nums){
-            ans.push_back(mp[x]);
-        }
-        return ans;
+        return res;
     }
 };
+
+int main(){
+    Solution s;
+    vector<int> nums = {1,2,1};
+    vector<int> res = s.nextGreaterElements(nums);
+    for(int i=0;i<res.size();i++){
+        cout<<res[i]<<" ";
+    }
+    return 0;
+}
