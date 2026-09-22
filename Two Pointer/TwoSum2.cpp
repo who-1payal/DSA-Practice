@@ -21,37 +21,83 @@ Output: [1,2]
 Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
 */
 
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int n;
-    cout<<"Enter the size of the array: ";
-    cin>>n;
-    int target;
-    vector <int> arr(n);
-    cout<<"Enter the elements of the array: ";
-    for(int i = 0; i<n;i++){
-        cin>>arr[i];
-    }
-    cout<<"Enter the target value: ";
-    cin>>target;
-    int i = 0;
-    int sum = 0;
-    int j = n-1;
-    while(i<j){
-        sum = arr[i]+arr[j];
-        if(sum==target){
-            cout<<i+1<<" "<<j+1<<endl;
-            break;
+class Solution{
 
+public:
+    vector<int> twoSum(vector<int> &numbers, int target){
+        int i = 0;
+        int j = numbers.size()-1;
+        while(i<j){
+            if(numbers[i]+numbers[j]>target){
+                j--;
+            }
+            else if(numbers[i]+numbers[j]<target){
+                i++;
+            }
+            else if(numbers[i]+numbers[j]==target){
+                return{i+1,j+1};
+            }
         }
-        else if(sum<target){
-            i++;
-        }
-        else if(sum>target){
-            j--;
-        }
+        return{};
     }
-    return 0;   
+};
+
+int main(){
+
+    int n;
+    cout<<"Enter number of elements: ";
+    cin>>n;
+    vector<int> arr;
+    int element;
+    for(int i = 0; i<n ; i++){
+        cin>>element;
+        arr.push_back(element);
+    }
+    int target;
+    cout<<"Enter target:";
+    cin>>target;
+    Solution s;
+    vector<int> res = s.twoSum(arr,target);
+    for(int i = 0; i<res.size(); i++){
+        cout<<res[i]<<" ";
+    }
 }
+
+/*#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    vector<int> arr;
+    string line;
+
+    cout << "Enter array: ";
+    getline(cin, line);
+
+    stringstream ss(line);
+
+    int element;
+
+    while(ss >> element) {
+        arr.push_back(element);
+    }
+
+    int target;
+
+    cout << "Enter target: ";
+    cin >> target;
+
+    Solution s;
+
+    vector<int> res = s.twoSum(arr, target);
+
+    for(int i = 0; i < res.size(); i++) {
+        cout << res[i] << " ";
+    }
+
+    return 0;
+}
+*/
